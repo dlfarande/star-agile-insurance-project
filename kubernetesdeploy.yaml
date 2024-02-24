@@ -18,7 +18,7 @@ spec:
       - name: dlf-insurance-eta-container
         image: dlfarande/dlf-insurance-eta-app
         ports:
-        - containerPort: 8085
+        - containerPort: 8081
 ---
 apiVersion: v1
 kind: Service
@@ -33,5 +33,5 @@ spec:
   type: NodePort
   ports:
   - nodePort: 31039    
-    port: 8085
-    targetPort: 8085
+    port: 8081
+    targetPort: 8081
