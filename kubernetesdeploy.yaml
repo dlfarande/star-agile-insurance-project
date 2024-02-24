@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dlf-insurance-deploy
+  labels:
+    app: dlf-insurance-eta-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dlf-insurance-eta-app
+  template:
+    metadata:
+      labels:
+        app: dlf-insurance-eta-app
+    spec:
+      containers:
+      - name: dlf-insurance-eta-container
+        image: dlfarande/dlf-insurance-eta-app
+        ports:
+        - containerPort: 8085
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dlf-insurance-eta-np-service
+  labels:
+    app: dlf-insurance-eta-app
+spec:
+  selector:
+    app: dlf-insurance-eta-app
+
+  type: NodePort
+  ports:
+  - nodePort: 31039    
+    port: 8085
+    targetPort: 8085
